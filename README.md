@@ -47,7 +47,7 @@ function sendPostRequest($url, $authToken, $data, $providerId, $import_type, $se
 $url = 'https://drm.xtream-masters.com/api.php';
 $authToken = 'your_auth_token_here';
 $providerId = 1;
-$server_id = 480;
+$server_id = 123;
 $import_type = 'ImportParse';
 
 // Channel Data
@@ -91,7 +91,7 @@ def send_post_request(url, auth_token, data, provider_id, import_type, server_id
 url = 'https://drm.xtream-masters.com/api.php'
 auth_token = 'your_auth_token_here'
 provider_id = 1
-server_id = 480
+server_id = 123
 import_type = 'ImportParse'
 
 # Channel Data
