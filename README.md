@@ -145,30 +145,9 @@ print(result)
 ## Security Notes
 
 - 🔒 Always keep your auth token secure
-- ⚠️ Remove SSL verification bypass in production
 - 🛡️ Use environment variables for sensitive data
-
-## Support
-
-For assistance, contact [your support email] or open an issue in this repository.
 
 ---
 
 *This project is not affiliated with any DRM service provider. Use at your own discretion.*
 ```
-
-This README includes:
-1. Clear structure with collapsible code blocks
-2. Language-specific implementations
-3. Parameter reference table
-4. Security considerations
-5. Easy-to-follow instructions
-6. Important disclaimer
-7. Support information
-
-You can enhance it further by adding:
-- Badges for version/status
-- Screenshots of sample responses
-- Environment setup instructions
-- Contribution guidelines
-- Changelog
