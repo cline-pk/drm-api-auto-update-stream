@@ -1,5 +1,8 @@
 # drm-api-auto-update-stream
-drm auto stream name, mpd &amp; keys updater api in python &amp; php
+
+#5 Minutes Read
+
+Drm auto stream name, mpd &amp; keys updater api in python &amp; php
 
 #url is statics
 
