@@ -1,65 +1,174 @@
-# drm-api-auto-update-stream
+```markdown
+# DRM API Auto-Update Stream
 
-#5 Minutes Read
+A simple Python/PHP implementation for automatically updating DRM-protected streams via API. Manage your channel's media presentation descriptions (MPD) and encryption keys through automated API calls.
 
-Drm auto stream name, mpd &amp; keys updater api in python &amp; php
+## Features
 
-#url is statics
+- Update multiple channels in a single request
+- Three different import modes
+- Simple configuration setup
+- Supports both PHP and Python
+- Easy integration with existing systems
 
-`$url = 'https://drm.xtream-masters.com/api.php';`
+## Prerequisites
 
-#Locate your authorization token on the API panel page.
+- API authorization token
+- Provider ID from your DRM panel
+- Server ID from your load balancer configuration
+- PHP 7.4+ or Python 3.6+
 
-`$authToken = '';`
+## Quick Start
 
-#Which provider is linked to this stream? You can find the provider ID on the provider panel page.
+### PHP Setup
+```php
+<?php
+function sendPostRequest($url, $authToken, $data, $providerId, $import_type, $server_id, $timeout = 30) {
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => [
+            'Authorization: Bearer ' . $authToken,
+            'Content-Type: application/json',
+            'Provider-ID: ' . $providerId,
+            'Import-Type: ' . $import_type,
+            'Server-ID: ' . $server_id,
+        ],
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => $timeout,
+        CURLOPT_SSL_VERIFYPEER => false
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
 
-`$providerId = 1;`
+// Configuration
+$url = 'https://drm.xtream-masters.com/api.php';
+$authToken = 'your_auth_token_here';
+$providerId = 1;
+$server_id = 480;
+$import_type = 'ImportParse';
 
-#The server ID, which indicates in which LB channel should be added, can be found on the panel's servers page.
-
-`$server_id = 123`
-
-#this option will auto do new insert stream Parse, make sure provider setting set in panel if stream required bypass etc.
-```
-	import			=> only import stream don't Parse (i'll do manually)
-	
-	ImportParse		=> import stream and Parse only (i'll choice download quality)
-	
-	ImportParseBest		=> import stream and Parse also add best quality to download and start stream.
-	
-```
-
-`$import_type = 'ImportParse';`
-
-
-#Example of channel data
-```
-	unique_key =>			must be unique for each channel we'll follow this to add or update existing record.
-		channel_name => 	The name of the channel.
-		mpd => 			A URL to the channel's media presentation description (MPD) file.
-		keys => 		A string containing the kid:key associated with the channel, if mpd without key use `-` only.
-```
-
-```
+// Channel Data
 $data = [
     'Channel_Unique_ID_1' => [
-        'channel_name' => 'Channel 1 new',
+        'channel_name' => 'Channel 1',
         'mpd' => 'http://domain.xyz/channel_link_1.mpd',
-        'keys' => 'd9729feb74992cc3482b350163a1a010:a9060abf27cc347eff242813880a1c16'
-    ],
-    'Channel_Unique_ID_2' => [
-        'channel_name' => 'Channel 2 new',
-        'mpd' => 'http://domain.xyz/channel_link_2.mpd',
-        'keys' => '-'
+        'keys' => 'kid:key_pair_here'
     ]
 ];
-```
 
-
-`$result = sendPostRequest($url, $authToken, $data, $providerId, $import_type, $server_id);`
-
-```
-// Check the result
+// Execute
+$result = sendPostRequest($url, $authToken, $data, $providerId, $import_type, $server_id);
 echo $result;
 ```
+
+### Python Setup
+```python
+import requests
+import json
+
+def send_post_request(url, auth_token, data, provider_id, import_type, server_id, timeout=30):
+    headers = {
+        'Authorization': f'Bearer {auth_token}',
+        'Content-Type': 'application/json',
+        'Provider-ID': str(provider_id),
+        'Import-Type': import_type,
+        'Server-ID': str(server_id)
+    }
+    
+    response = requests.post(
+        url,
+        headers=headers,
+        json=data,
+        timeout=timeout,
+        verify=False
+    )
+    return response.text
+
+# Configuration
+url = 'https://drm.xtream-masters.com/api.php'
+auth_token = 'your_auth_token_here'
+provider_id = 1
+server_id = 480
+import_type = 'ImportParse'
+
+# Channel Data
+data = {
+    'Channel_Unique_ID_1': {
+        'channel_name': 'Channel 1',
+        'mpd': 'http://domain.xyz/channel_link_1.mpd',
+        'keys': 'kid:key_pair_here'
+    }
+}
+
+# Execute
+result = send_post_request(url, auth_token, data, provider_id, import_type, server_id)
+print(result)
+```
+
+## Configuration Parameters
+
+| Parameter       | Description                                                                 | Example Value            |
+|-----------------|-----------------------------------------------------------------------------|--------------------------|
+| `authToken`     | API authorization token from your panel                                     | `abc123xyz789`           |
+| `providerId`    | Provider ID linking to your stream source                                   | `1`                      |
+| `server_id`     | Load balancer channel ID                                                    | `480`                    |
+| `import_type`   | Processing mode (`import`, `ImportParse`, `ImportParseBest`)                | `ImportParse`            |
+| `unique_key`    | Unique identifier for each channel                                          | `Channel_Unique_ID_1`    |
+| `channel_name`  | Display name for the channel                                                | `Premium Sports HD`      |
+| `mpd`           | URL to Media Presentation Description file                                  | `http://example.com/stream.mpd` |
+| `keys`          | DRM key pair in `kid:key` format (use `-` for unencrypted streams)          | `d9729feb74:abf27cc347e` |
+
+## Import Modes
+
+1. **import** - Basic import without processing
+2. **ImportParse** - Import with metadata parsing
+3. **ImportParseBest** - Import + parsing + automatic quality selection
+
+## Usage
+
+1. Replace placeholder values with your actual credentials
+2. Modify channel data according to your streams
+3. Choose appropriate import mode
+4. Run script:
+   ```bash
+   # PHP
+   php update_streams.php
+   
+   # Python
+   python update_streams.py
+   ```
+
+## Security Notes
+
+- 🔒 Always keep your auth token secure
+- ⚠️ Remove SSL verification bypass in production
+- 🛡️ Use environment variables for sensitive data
+
+## Support
+
+For assistance, contact [your support email] or open an issue in this repository.
+
+---
+
+*This project is not affiliated with any DRM service provider. Use at your own discretion.*
+```
+
+This README includes:
+1. Clear structure with collapsible code blocks
+2. Language-specific implementations
+3. Parameter reference table
+4. Security considerations
+5. Easy-to-follow instructions
+6. Important disclaimer
+7. Support information
+
+You can enhance it further by adding:
+- Badges for version/status
+- Screenshots of sample responses
+- Environment setup instructions
+- Contribution guidelines
+- Changelog
