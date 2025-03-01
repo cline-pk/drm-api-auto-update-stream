@@ -1,4 +1,3 @@
-markdown
 # DRM API Auto-Update Stream
 
 A simple Python/PHP implementation for automatically updating DRM-protected streams via API. Manage your channel's media presentation descriptions (MPD) and encryption keys through automated API calls.
