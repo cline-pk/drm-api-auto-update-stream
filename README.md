@@ -1,8 +1,8 @@
 # drm-api-auto-update-stream
 drm auto stream name, mpd &amp; keys updater api in python &amp; php
 
-//url is statics
-$url = 'https://drm.xtream-masters.com/api.php';
+#url is statics
+`$url = 'https://drm.xtream-masters.com/api.php';`
 
 // Locate your authorization token on the API panel page.
 $authToken = '';
