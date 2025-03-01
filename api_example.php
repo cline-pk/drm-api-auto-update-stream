@@ -63,7 +63,7 @@ $server_id = 123
 	
 	ImportParse		=> import stream and Parse only (i'll choice download quality)
 	
-	ImportParseBest	=> import stream and Parse also add best quality to download and start stream.
+	ImportParseBest		=> import stream and Parse also add best quality to download and start stream.
 	
 */
 $import_type = 'ImportParse';
@@ -71,10 +71,10 @@ $import_type = 'ImportParse';
 
 // Example of channel data
 /*
-	unique_key =>		must be unique for each channel we'll follow this to add or update existing record.
+	unique_key =>			must be unique for each channel we'll follow this to add or update existing record.
 		channel_name => 	The name of the channel.
-		mpd => 				A URL to the channel's media presentation description (MPD) file.
-		keys => 			A string containing the kid:key associated with the channel, if mpd without key use `-` only.
+		mpd => 			A URL to the channel's media presentation description (MPD) file.
+		keys => 		A string containing the kid:key associated with the channel, if mpd without key use `-` only.
 */
 
 $data = [
