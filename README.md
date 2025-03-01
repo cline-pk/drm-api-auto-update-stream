@@ -30,14 +30,15 @@ drm auto stream name, mpd &amp; keys updater api in python &amp; php
 `$import_type = 'ImportParse';`
 
 
-// Example of channel data
-/*
+#Example of channel data
+```
 	unique_key =>		must be unique for each channel we'll follow this to add or update existing record.
 		channel_name => 	The name of the channel.
 		mpd => 				A URL to the channel's media presentation description (MPD) file.
 		keys => 			A string containing the kid:key associated with the channel, if mpd without key use `-` only.
-*/
+```
 
+```
 $data = [
     'Channel_Unique_ID_1' => [
         'channel_name' => 'Channel 1 new',
@@ -50,10 +51,12 @@ $data = [
         'keys' => '-'
     ]
 ];
+```
 
 
+`$result = sendPostRequest($url, $authToken, $data, $providerId, $import_type, $server_id);`
 
-$result = sendPostRequest($url, $authToken, $data, $providerId, $import_type, $server_id);
-
+```
 // Check the result
 echo $result;
+```
