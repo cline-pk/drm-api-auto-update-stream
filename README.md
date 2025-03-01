@@ -114,7 +114,7 @@ print(result)
 |-----------------|-----------------------------------------------------------------------------|--------------------------|
 | `authToken`     | API authorization token from your panel                                     | `abc123xyz789`           |
 | `providerId`    | Provider ID linking to your stream source                                   | `1`                      |
-| `server_id`     | Load balancer channel ID                                                    | `480`                    |
+| `server_id`     | Load balancer Server ID                                                     | `123`                    |
 | `import_type`   | Processing mode (`import`, `ImportParse`, `ImportParseBest`)                | `ImportParse`            |
 | `unique_key`    | Unique identifier for each channel                                          | `Channel_Unique_ID_1`    |
 | `channel_name`  | Display name for the channel                                                | `Premium Sports HD`      |
