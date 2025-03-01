@@ -2,27 +2,32 @@
 drm auto stream name, mpd &amp; keys updater api in python &amp; php
 
 #url is statics
+
 `$url = 'https://drm.xtream-masters.com/api.php';`
 
-// Locate your authorization token on the API panel page.
-$authToken = '';
+#Locate your authorization token on the API panel page.
 
-//Which provider is linked to this stream? You can find the provider ID on the provider panel page.
-$providerId = 1;
+`$authToken = '';`
 
-//The server ID, which indicates in which LB channel should be added, can be found on the panel's servers page.
-$server_id = 123
+#Which provider is linked to this stream? You can find the provider ID on the provider panel page.
 
-//this option will auto do new insert stream Parse, make sure provider setting set in panel if stream required bypass etc.
-/*
+`$providerId = 1;`
+
+#The server ID, which indicates in which LB channel should be added, can be found on the panel's servers page.
+
+`$server_id = 123`
+
+#this option will auto do new insert stream Parse, make sure provider setting set in panel if stream required bypass etc.
+```
 	import			=> only import stream don't Parse (i'll do manually)
 	
 	ImportParse		=> import stream and Parse only (i'll choice download quality)
 	
 	ImportParseBest	=> import stream and Parse also add best quality to download and start stream.
 	
-*/
-$import_type = 'ImportParse';
+```
+
+`$import_type = 'ImportParse';`
 
 
 // Example of channel data
